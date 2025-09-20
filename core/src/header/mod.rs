@@ -341,7 +341,7 @@ impl Header {
             header.uninstall_display_size = u64::from(reader.read_u32::<LE>()?);
         }
 
-        if version.is_blackbox() {
+        if version.is_blackbox() || version == (4, 2, 6, 0) {
             reader.read_u8()?;
         }
 
@@ -355,7 +355,7 @@ impl Header {
                 AutoBool::from_header_flags(&header.flags, HeaderFlags::SHOW_LANGUAGE_DIALOG);
             header.language_detection = LanguageDetection::from(header.flags);
         }
-        if version < (4, 1, 5) {
+        if version < (4, 2, 7) {
             header.compression = Compression::from(header.flags);
         }
         if version < (5, 3, 3) {
