@@ -200,3 +200,15 @@ fn inno_6_7_1() -> Result<(), Box<dyn Error>> {
 
     Ok(())
 }
+
+#[test]
+#[ignore]
+fn inno_7_0_0() -> Result<(), Box<dyn Error>> {
+    let inno_bytes = download_inno_version("7.0.0")?;
+    let inno = Inno::new(Cursor::new(inno_bytes))?;
+
+    assert_eq!(inno.version(), InnoVersion::new(7, 0, 0, 0));
+    assert!(inno.version().is_unicode());
+
+    Ok(())
+}

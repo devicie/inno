@@ -67,6 +67,11 @@ impl RunEntry {
 
         Condition::read(&mut reader, codepage, version)?;
 
+        // OnLog
+        if version >= (7, 0, 0, 1) {
+            reader.read_decoded_pascal_string(codepage)?;
+        }
+
         WindowsVersionRange::read_from(&mut reader, version)?;
 
         if version >= (1, 3, 24) {
